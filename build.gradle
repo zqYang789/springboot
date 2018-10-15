@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.sunsan'
+version = '0.1'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-batch")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework:spring-jdbc")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("com.ibeetl:beetl:2.8.3")
+    compile("org.apache.commons:commons-lang3:3.6")
+    compile("com.ibeetl:beetlsql:2.10.26")
+    compile("mysql:mysql-connector-java:5.0.5")
+    compile("io.springfox:springfox-swagger2:2.8.0")
+    compile("io.springfox:springfox-swagger-ui:2.8.0")
+    compile("com.alibaba:fastjson:1.2.51")
+    compile("com.fasterxml.jackson.core:jackson-annotations:2.7.3")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.7.3")
+    compile("com.fasterxml.jackson.core:jackson-core:2.7.3")
+	compile("com.alibaba:druid:1.1.9")
+    compile("cz.jirutka.rsql:rsql-parser:2.1.0")
+    compile("io.jsonwebtoken:jjwt:0.7.0")
+    implementation('org.springframework.boot:spring-boot-starter')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}

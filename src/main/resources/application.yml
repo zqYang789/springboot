@@ -1,0 +1,4 @@
+spring:
+# 启动加载配置版本
+  profiles:
+    active: dev
