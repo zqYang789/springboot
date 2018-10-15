@@ -1,4 +1,4 @@
-## springboot+beetlsql+gradle架构##
+## springboot+beetlsql+gradle架构
 
 ## 1、项目检出
 
