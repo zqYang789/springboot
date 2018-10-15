@@ -16,11 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApiOriginFilter implements javax.servlet.Filter {
     private String[] allowDomain = {
-            "http://127.0.0.1:8081",
-            "http://localhost:8081",
-            "http://192.168.1.14:8080",
-            "https://www.test2.com",
-            
+            "https://www.test.com",
     };
     
 
@@ -28,7 +24,7 @@ public class ApiOriginFilter implements javax.servlet.Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;
-        if (false) {
+        if (true) {
             String originHeader = ((HttpServletRequest) request).getHeader("Origin");
             if (ArrayUtils.contains(allowDomain, originHeader))
                 res.addHeader("Access-Control-Allow-Origin", originHeader);
