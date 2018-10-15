@@ -1,9 +1,10 @@
-#springboot+beetlsql+gradle架构
-#1、项目检出
+# springboot+beetlsql+gradle架构
+
+# 1、项目检出
 
   git clone https://github.com/zqYang789/sunsan_gradle.git
 
-#2、数据源配置
+# 2、数据源配置
 
   修改配置文件：src->resource->application-dev.yml
   
