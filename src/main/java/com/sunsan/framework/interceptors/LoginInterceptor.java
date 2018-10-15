@@ -112,22 +112,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
         String url = requestURI.substring(contextPath.length() + 1);
-
-
         if (url.startsWith("swagger") || excludeUrls.contains(url)) {
             return true;
         }
-
         //如果不是映射到方法直接通过
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-        Class<?> beanType = handlerMethod.getBeanType();
-        Object bean = handlerMethod.getBean();
-
         try {
             ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
             if (apiOperation == null) {
@@ -142,10 +135,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 // 有异常也无须反馈给前端
                 try {
                     String token = request.getHeader("api_key");
-
                     if (isTestToken(request, token))
                         return true;
-
                     if (StringUtils.isNotEmpty(token)) {
                         TokenUser tokenUser = manager.getTokenUserFromToken(token);
                         Integer userId = tokenUser.getUserId();
@@ -157,11 +148,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
                 return true;
             }
-
-            //后台登录检测
-            String[] perms = getApiPerms(method, beanType);
-            checkAdminWebTokenAndPerm(request, perms);
-
             return true;
         } catch (ApiException e) {
             int responseStatus = HttpServletResponse.SC_UNAUTHORIZED;

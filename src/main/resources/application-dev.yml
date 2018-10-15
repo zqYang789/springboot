@@ -24,3 +24,15 @@ spring:
       filters: stat,wall,log4j,config
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=false;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMvhHVdtKkXISqZuHIhXfkwULhhdW2VPuZR63XureYe9fKqOPNU/CyIbqjXwXb9O8vQnWXhyDJnVpr6a1nwveA8CAwEAAQ==
+  redis:
+      host: 47.105.69.13
+      password: Redis8888
+      port: 9111
+      pool:
+        max-active: 8   #连接池最大连接数（使用负值表示没有限制）
+        max-idle: 8     #连接池中的最大空闲连接
+        min-idle: 1     #连接池中的最小空闲连接
+        max-wait: 3000  #连接池最大阻塞等待毫秒时间（使用负值-1表示没有限制）
+token:
+  persistSeconds: 3600 #[一个小时] 持续时间，如果没有api持续访问，此时间后token失效
+  expiresSeconds: 86400 #[一天] 到期时间，就算一直有api持续访问，此时间后token也会失效
