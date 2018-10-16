@@ -145,11 +145,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                     }
                 } catch (Exception ignored) {
                 }
-
                 return true;
             }
+            checkAdminWebToken(request);
             return true;
-        } catch (ApiException e) {
+        }catch (ApiException e) {
             int responseStatus = HttpServletResponse.SC_UNAUTHORIZED;
             int[] internalEcs = new int[]{
                     ErrCode.noApiOperation.getCode(),
@@ -205,13 +205,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.equals(token, "888888")) {
             User user = userService.getTestUser();
             request.setAttribute("currentUser", user);
-            request.setAttribute("currentUserId", user.getUserid());
+            request.setAttribute("currentUserId", user.getId());
             return true;
         }
         return false;
     }
 
-    private void checkAdminWebTokenAndPerm(HttpServletRequest request, String[] perms) throws Exception {
+    private void checkAdminWebToken(HttpServletRequest request) throws Exception {
         //后台登录检测
         String token = request.getHeader("api_key");
         // 获取api_key,即token,token的所有失败情况由异常处理
@@ -230,17 +230,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         // 更新redis token失效时间
         manager.refreshToken(tokenUser);
 
-        /*
-        // 权限检查
-        if (perms != null && perms.length > 0) {
-            for (String perm : perms) {
-                if (!userService.havePermission(userId, perm))
-                    throw new ApiException(ErrCode.noPermission);
-            }
-        }
-
-        */
-        //保存全局用户信息
         request.setAttribute("currentUserId",userId);
     }
 

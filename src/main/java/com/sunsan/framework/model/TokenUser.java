@@ -12,9 +12,6 @@ public class TokenUser implements Serializable {
     private String lastIp;
     private String device;
     private String token;
-    // private LocalDateTime lastPasswordReset;
-
-
     public String getUsername() {
         return username;
     }

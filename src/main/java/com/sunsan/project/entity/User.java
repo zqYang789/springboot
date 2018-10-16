@@ -1,55 +1,50 @@
 package com.sunsan.project.entity;
 
 public class User {
-	private Integer userid;
+	private Integer id;
 	private String username;
-	private Integer userage;
-	private Integer usersex;
-	private String userpwd;
-	private String userdesc;
-	public Integer getUserid() {
-		return userid;
-	}
-	public void setUserid(Integer userid) {
-		this.userid = userid;
-	}
-	public String getUsername() {
+	private String password;
+	private String mobile;
+	private String realname;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Integer getUserage() {
-		return userage;
+
+	public String getPassword() {
+		return password;
 	}
-	public void setUserage(Integer userage) {
-		this.userage = userage;
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public Integer getUsersex() {
-		return usersex;
+
+	public String getMobile() {
+		return mobile;
 	}
-	public void setUsersex(Integer usersex) {
-		this.usersex = usersex;
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
-	public String getUserpwd() {
-		return userpwd;
+
+	public String getRealname() {
+		return realname;
 	}
-	public void setUserpwd(String userpwd) {
-		this.userpwd = userpwd;
-	}
-	public String getUserdesc() {
-		return userdesc;
-	}
-	public void setUserdesc(String userdesc) {
-		this.userdesc = userdesc;
-	}
-	
-	@Override
-	public String toString() {
-		return "USER{用户编号:"+this.userid+ ",用户名称:"+this.username+
-				",密码:"+this.userpwd+
-				",年龄:"+this.userage+
-				",性别:"+this.usersex+
-				",备注:"+this.userdesc+"}";
+
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 }

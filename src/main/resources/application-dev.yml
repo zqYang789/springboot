@@ -6,9 +6,9 @@ spring:
   datasource:
     admin:
       #后台管理库
-      url: jdbc:mysql://192.168.1.14:3306/zsj?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+      url: jdbc:mysql://121.40.38.25:3306/test_zqy?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
       username: root
-      password: 123456
+      password: root1243
       driver-class-name: com.mysql.jdbc.Driver
       max-active: 20
       initial-size: 5
