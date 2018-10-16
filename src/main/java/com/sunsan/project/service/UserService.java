@@ -126,24 +126,11 @@ public class UserService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return hzzUser;
 	}
 	
 	public User unique(int userid) {
-		
 		return this.userDao.unique(userid);
 	}
-	public int updateById(User user) {
-		// TODO Auto-generated method stub
-		return this.userDao.updateById(user);
-	}
-	public KeyHolder insertReturnKey(User user) {
-		// TODO Auto-generated method stub
-		return this.userDao.insertReturnKey(user);
-	}
-	public int deleteById(int userid) {
-		// TODO Auto-generated method stub
-		return this.userDao.deleteById(userid);
-	}
+
 }

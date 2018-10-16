@@ -63,40 +63,10 @@ public class UserController {
 		return ResponseEntity.ok(user);
 	}
 	
-	//根据id修改
-	 @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
-	    public  String updateUser(@RequestBody User user){
-	        int u = userService.updateById(user);
-	        if(u==1){
-	            return user.toString();
-	        }else {
-	            return "fail";
-	        }
-	    }
+
 	 
-	 	//添加
-	    @RequestMapping(value = "/insertUser",method = RequestMethod.POST)
-	    public  String postUser(
-	    		@RequestBody User user) {
-	      
-	        KeyHolder u = userService.insertReturnKey(user);
-	        if (u.getInt() > 0) {
-	            return user.toString();
-	        } else {
-	            return "fail";
-	        }
-	    }
-	    
-	    //删除
-	    @RequestMapping(value = "/delete",method=RequestMethod.POST)
-	    public String delUser(@RequestParam("userid")int userid) {
-	    	int u = userService.deleteById(userid);
-	    	if(u>0) {
-	    		return "删除成功";
-	    	}else {
-	    		return "fail";
-	    	}
-	    }
+
+
 
     @ApiFrequency(name = "login", time = 2, limit = 1) //限制验证接口访问频率2秒一次
     @ApiOperation(value = "登录", notes = "登录")
@@ -119,6 +89,7 @@ public class UserController {
         tokenUser.setLastIp(loginIp);
         tokenUser.setUserId(user.getId());
         String token = tokenManager.generateToken(tokenUser);
+
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setToken(token);
         loginInfo.setRealName(user.getRealname());
