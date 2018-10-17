@@ -46,7 +46,7 @@ dependencies {
     compile ("commons-codec:commons-codec:1.10")
     compile("org.springframework.boot:spring-boot-starter-data-redis")
     compile("org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE")
-
+    compile("commons-io:commons-io:2.5")
     implementation('org.springframework.boot:spring-boot-starter')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
