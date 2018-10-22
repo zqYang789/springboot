@@ -44,7 +44,6 @@ public class UserController {
 	
 	//查询所有
 	@ApiOperation(value = "查询所有（不含分页）", notes = "",authorizations = {@Authorization(value = "api_key")})
-	@ResponseBody
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful")})
 	@RequestMapping(value="/list",method=RequestMethod.POST)
 	public ResponseEntity<List<JSONObject>> list() {
