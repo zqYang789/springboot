@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.sunsan.project.dao.UserDao;
 import com.sunsan.project.entity.User;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class UserService {
 	
@@ -35,9 +37,14 @@ public class UserService {
 		return objs;
 	}
 
+	@Transactional
+	public void insert(User user){
+		user.setPassword(encryptPassword("123456"));
+		userDao.insert(user);
+	}
 
 	public User getTestUser(){
-		return userDao.createLambdaQuery().andEq(User::getUsername, "test").single();
+		return userDao.createLambdaQuery().andEq(User::getUsername, "zqy").single();
 	}
 
 	public User getUserByLoginNameAndPassword(String loginName, String password) throws ApiException {

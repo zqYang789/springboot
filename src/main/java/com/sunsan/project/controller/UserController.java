@@ -43,18 +43,30 @@ public class UserController {
 
 	
 	//查询所有
-	@ApiOperation(value = "查询所有（不含分页）", notes = "",authorizations = {@Authorization(value = "api_key")})
+	@ApiOperation(value = "新增", notes = "")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful")})
-	@RequestMapping(value="/list",method=RequestMethod.POST)
-	public ResponseEntity<List<JSONObject>> list() {
-		
-		List<JSONObject> results = userService.all();
-		
-		return ResponseEntity.ok(results);
+	@RequestMapping(value="/insert",method=RequestMethod.POST)
+	public ResponseEntity<User> insert() {
+	    User user = new User();
+	    user.setUsername("yangzhiqiang");
+	    user.setMobile("15101024650");
+	    user.setPassword("123456");
+	    user.setRealname("杨志强");
+	    userService.insert(user);
+		return ResponseEntity.ok(null);
 	}
+
+    @ApiOperation(value = "查询所有（不含分页）", notes = "")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful")})
+    @RequestMapping(value="/list",method=RequestMethod.POST)
+    public ResponseEntity<List<JSONObject>> list() {
+        List<JSONObject> results = userService.all();
+        return ResponseEntity.ok(results);
+    }
+
 	
 	//根据id查询
-	@ApiOperation(value = "查询", notes = "")
+	@ApiOperation(value = "查询", notes = "",authorizations = {@Authorization(value = "api_key")})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful")})
 	@RequestMapping(value="/findById" , method=RequestMethod.GET)
 	public ResponseEntity<User> getUserById(@RequestParam(value="userid",required = true) Integer userid) throws Exception {

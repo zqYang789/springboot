@@ -85,7 +85,8 @@ public class DataSourceConfig {
 		@ConfigurationProperties("spring.datasource.admin")
         @Primary
 		public DruidDataSource adminDataSource() {
-			return new DruidDataSource();
+			DruidDataSource druidDataSource = new DruidDataSource();
+			return druidDataSource;
 		}
 
 		//开启事务

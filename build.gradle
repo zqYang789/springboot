@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
+        springBootVersion = '1.5.17.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -11,25 +11,27 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
 
 group = 'com.sunsan'
-version = '0.1'
+version = '0.0.1'
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
+configurations {
+    providedRuntime
+}
+
+
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-batch")
-    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework:spring-jdbc")
-    compile("org.springframework.boot:spring-boot-devtools")
     compile("com.ibeetl:beetl:2.8.3")
     compile("org.apache.commons:commons-lang3:3.6")
     compile("com.ibeetl:beetlsql:2.10.26")
@@ -47,7 +49,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-redis")
     compile("org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE")
     compile("commons-io:commons-io:2.5")
-    implementation('org.springframework.boot:spring-boot-starter')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
 
 }
