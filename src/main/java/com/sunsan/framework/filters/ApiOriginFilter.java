@@ -24,7 +24,7 @@ public class ApiOriginFilter implements javax.servlet.Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;
-        if (true) {
+        if (false) {
             String originHeader = ((HttpServletRequest) request).getHeader("Origin");
             if (ArrayUtils.contains(allowDomain, originHeader))
                 res.addHeader("Access-Control-Allow-Origin", originHeader);
