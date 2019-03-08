@@ -1,6 +1,7 @@
 package com.sunsan.project.service;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.beetl.sql.core.db.KeyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,7 @@ import com.sunsan.project.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@CacheConfig(cacheNames = "user")
 public class UserService {
 	
 	
@@ -135,9 +139,11 @@ public class UserService {
 		}
 		return hzzUser;
 	}
-	
-	public User unique(int userid) {
-		return this.userDao.unique(userid);
+
+	@Cacheable(key="#userid")
+	public User unique(String userid) {
+		User user = this.userDao.unique(userid);
+		return user;
 	}
 
 }

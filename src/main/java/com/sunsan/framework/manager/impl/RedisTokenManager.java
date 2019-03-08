@@ -38,27 +38,19 @@ public class RedisTokenManager implements TokenManager {
     @Value("${token.expiresSeconds:86400}")
     private long tokenExpiresSecond;
 
-    private RedisTemplate<String, String> redisTemplateByToken;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
     private JwtTokenManager jwtTokenManager;
 
-    @Autowired
-    @Qualifier("redisTemplate")
-    public void setRedisByToken(RedisTemplate redis) {
-        System.out.println("persist " + tokenPersistSecond);
-        System.out.println("expires " + tokenExpiresSecond);
-        this.redisTemplateByToken = redis;
-        this.redisTemplateByToken.setKeySerializer(new StringRedisSerializer());
-        this.redisTemplateByToken.setValueSerializer(new StringRedisSerializer());
-    }
 
     @Override
     public String generateToken(TokenUser tokenUser) throws Exception {
         String token = jwtTokenManager.generateToken(tokenUser, tokenExpiresSecond);
         String key = getKey(tokenUser);
         //存储到redis并设置过期时间
-        redisTemplateByToken.boundValueOps(key).set(token, tokenPersistSecond, TimeUnit.SECONDS);
+        redisTemplate.boundValueOps(key).set(token, tokenPersistSecond, TimeUnit.SECONDS);
         return token;
     }
 
@@ -102,7 +94,7 @@ public class RedisTokenManager implements TokenManager {
         tokenUser.setToken(token);
         String key = getKey(tokenUser);
         //存储到redis并设置过期时间
-        redisTemplateByToken.boundValueOps(key).set(token, tokenPersistSecond, TimeUnit.SECONDS);
+        redisTemplate.boundValueOps(key).set(token, tokenPersistSecond, TimeUnit.SECONDS);
         return token;
     }
 
@@ -110,27 +102,27 @@ public class RedisTokenManager implements TokenManager {
     @Transactional
     public void refreshToken(TokenUser tokenUser) throws ApiException {
         String key = getKey(tokenUser);
-        redisTemplateByToken.boundValueOps(key).expire(tokenPersistSecond, TimeUnit.SECONDS);
+        redisTemplate.boundValueOps(key).expire(tokenPersistSecond, TimeUnit.SECONDS);
     }
 
     @Override
     public String getToken(TokenUser tokenUser) throws ApiException {
         String key = getKey(tokenUser);
-        return redisTemplateByToken.boundValueOps(key).get();
+        return redisTemplate.boundValueOps(key).get();
     }
 
     @Override
     public void deleteToken(TokenUser tokenUser) throws ApiException {
         String key = getKey(tokenUser);
-        redisTemplateByToken.delete(key);
+        redisTemplate.delete(key);
     }
 
     @Override
     public List<String> getAllTokens() {
-        Set<String> keys = redisTemplateByToken.keys("^" + KEY_PREFIX + "*");
+        Set<String> keys = redisTemplate.keys("^" + KEY_PREFIX + "*");
         List<String> allTokens = new ArrayList<>();
         for (String key : keys) {
-            allTokens.add(redisTemplateByToken.boundValueOps(key).get());
+            allTokens.add(redisTemplate.boundValueOps(key).get());
         }
         return allTokens;
     }

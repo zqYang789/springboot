@@ -1,6 +1,9 @@
 package com.sunsan.project.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	private static final long serialVersionUID = -299290788254569188L;
 	private Integer id;
 	private String username;
 	private String password;

@@ -69,7 +69,7 @@ public class UserController {
 	@ApiOperation(value = "查询", notes = "",authorizations = {@Authorization(value = "api_key")})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful")})
 	@RequestMapping(value="/findById" , method=RequestMethod.GET)
-	public ResponseEntity<User> getUserById(@RequestParam(value="userid",required = true) Integer userid) throws Exception {
+	public ResponseEntity<User> getUserById(@RequestParam(value="userid",required = true) String userid) throws Exception {
 		User user = userService.unique(userid);
 		return ResponseEntity.ok(user);
 	}
@@ -100,7 +100,6 @@ public class UserController {
         tokenUser.setLastIp(loginIp);
         tokenUser.setUserId(user.getId());
         String token = tokenManager.generateToken(tokenUser);
-
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setToken(token);
         loginInfo.setRealName(user.getRealname());
