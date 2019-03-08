@@ -72,7 +72,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         serializer.setObjectMapper(mapper);
 
         template.setValueSerializer(serializer);
-        template.setKeySerializer(new StringRedisSerializer());
+        template.setKeySerializer(serializer);
         template.afterPropertiesSet();
         return template;
     }

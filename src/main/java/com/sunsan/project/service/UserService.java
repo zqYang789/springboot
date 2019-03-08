@@ -142,7 +142,7 @@ public class UserService {
 	}
 
 	@Cacheable(key="#userid")
-	public User unique(String userid) {
+	public User unique(Integer userid) {
 		User user = this.userDao.unique(userid);
 		return user;
 	}
