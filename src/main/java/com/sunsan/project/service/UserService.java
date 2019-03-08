@@ -35,6 +35,7 @@ public class UserService {
 
 	private int baseTimeout = 3600; //key默认失效时间
 
+	@Cacheable(key = "'userList'")
 	public List<JSONObject> all(){
 		Map<String,Object> para = new HashMap<String,Object>();
 		List<JSONObject> objs = this.userDao.getSQLManager().select("user.all", JSONObject.class);
@@ -141,7 +142,7 @@ public class UserService {
 	}
 
 	@Cacheable(key="#userid")
-	public User unique(Integer userid) {
+	public User unique(String userid) {
 		User user = this.userDao.unique(userid);
 		return user;
 	}
