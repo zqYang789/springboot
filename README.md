@@ -2,7 +2,7 @@
 
 ## 1、项目检出
 
-  git clone https://github.com/zqYang789/sunsan_gradle.git
+  git clone https://github.com/zqYang789/springboot.git
 
 ## 2、数据源配置
 
