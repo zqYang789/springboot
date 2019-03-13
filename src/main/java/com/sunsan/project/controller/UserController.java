@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value="/user",produces="application/json")
 @Api(value="用户信息",description="用户信息表")
+@ApiFrequency(name = "用户信息", time = 1, limit = 5) //限制验证接口访问频率5秒一次（也可以单独加方法上）
 public class UserController {
 	@Autowired
 	private UserService userService;
